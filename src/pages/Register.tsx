@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { serverURL } from '../config';
 
 // src/pages/Register.tsx
 const Register = () => {
@@ -13,7 +14,7 @@ const Register = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		try {
-			await fetch('http://localhost:3000/register', {
+			await fetch(`${serverURL}/register`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

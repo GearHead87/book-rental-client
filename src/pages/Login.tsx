@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { serverURL } from '../config';
 
 // src/pages/Login.tsx
 const Login = () => {
@@ -14,7 +15,7 @@ const Login = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		try {
-			const response = await fetch('http://localhost:3000/login', {
+			const response = await fetch(`${serverURL}/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

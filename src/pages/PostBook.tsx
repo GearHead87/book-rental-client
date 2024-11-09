@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { serverURL } from '../config';
 
 // src/pages/PostBook.tsx
 const PostBook = () => {
@@ -21,7 +22,7 @@ const PostBook = () => {
 		});
 
 		try {
-			await fetch('http://localhost:3000/post-book', {
+			await fetch(`${serverURL}/post-book`, {
 				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${token}`,

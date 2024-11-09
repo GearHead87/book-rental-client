@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import BookCard from '../components/BookCard';
 import { Book } from '../types/types';
+import { serverURL } from '../config';
 
 // src/pages/Home.tsx
 const Home = () => {
@@ -20,7 +21,7 @@ const Home = () => {
 		try {
 			setLoading(true);
 			setError(null);
-			const response = await fetch('http://localhost:3000/books');
+			const response = await fetch(`${serverURL}/books`);
 			if (!response.ok) throw new Error('Failed to fetch books');
 			const data = await response.json();
 			setBooks(data);
@@ -44,7 +45,7 @@ const Home = () => {
 
 		try {
 			setLoading(true);
-			const response = await fetch(`http://localhost:3000/delete-book/${id}`, {
+			const response = await fetch(`${serverURL}/delete-book/${id}`, {
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -85,7 +86,7 @@ const Home = () => {
 			setLoading(true);
 			setError(null);
 
-			const response = await fetch(`http://localhost:3000/rent-book/${id}`, {
+			const response = await fetch(`${serverURL}/rent-book/${id}`, {
 				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -123,7 +124,7 @@ const Home = () => {
 			setLoading(true);
 			setError(null);
 
-			const response = await fetch(`http://localhost:3000/return-book/${id}`, {
+			const response = await fetch(`${serverURL}/return-book/${id}`, {
 				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${token}`,

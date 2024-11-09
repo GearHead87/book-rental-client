@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate, useParams } from 'react-router-dom';
+import { serverURL } from '../config';
+
 // src/pages/UpdateBook.tsx
 const UpdateBook = () => {
 	const { id } = useParams<{ id: string }>();
@@ -37,7 +42,7 @@ const UpdateBook = () => {
 		});
 
 		try {
-			await fetch(`http://localhost:3000/update-book/${id}`, {
+			await fetch(`${serverURL}/update-book/${id}`, {
 				method: 'PATCH',
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -55,7 +60,49 @@ const UpdateBook = () => {
 			<h1 className="text-3xl font-bold mb-6">Update Book</h1>
 			<form onSubmit={handleSubmit} className="space-y-4">
 				{/* Same form fields as PostBook */}
-				{/* ... */}
+				<div>
+					<label className="block mb-1">Book Name</label>
+					<input
+						type="text"
+						required
+						className="w-full p-2 border rounded"
+						value={formData.book_name}
+						onChange={(e) => setFormData({ ...formData, book_name: e.target.value })}
+					/>
+				</div>
+				<div>
+					<label className="block mb-1">Author</label>
+					<input
+						type="text"
+						required
+						className="w-full p-2 border rounded"
+						value={formData.author}
+						onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+					/>
+				</div>
+				<div>
+					<label className="block mb-1">Published Date</label>
+					<input
+						type="date"
+						required
+						className="w-full p-2 border rounded"
+						value={formData.published_date}
+						onChange={(e) =>
+							setFormData({ ...formData, published_date: e.target.value })
+						}
+					/>
+				</div>
+				<div>
+					<label className="block mb-1">Image</label>
+					<input
+						type="file"
+						accept="image/*"
+						className="w-full p-2 border rounded"
+						onChange={(e) =>
+							setFormData({ ...formData, image: e.target.files?.[0] || null })
+						}
+					/>
+				</div>
 				<button
 					type="submit"
 					className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"

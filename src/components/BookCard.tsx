@@ -16,7 +16,6 @@ const BookCard = ({
 	onReturn: (id: number) => void;
 }) => {
 	const { token, user } = useAuth();
-	console.log(user);
 	const isOwner = user?.name === book.user_name;
 
 	return (
@@ -58,7 +57,7 @@ const BookCard = ({
 							Rent
 						</button>
 					)}
-					{token && book.rented && (
+					{token && !isOwner && book.rented && (
 						<button
 							onClick={() => onReturn(book.id)}
 							className="bg-green-500 text-white px-4 py-2 rounded"
